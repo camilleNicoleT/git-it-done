@@ -47,8 +47,9 @@ if (repos.length === 0) {
   repoContainerEl.textContent = "No repositories found.";
   return;
 }
-  // clear old content
-  repoContainerEl.textContent = "";
+
+repoSearchTerm.textContent = searchTerm;
+
 // loop over repos
 for (var i = 0; i < repos.length; i++) {
   // format repo name
@@ -65,11 +66,25 @@ for (var i = 0; i < repos.length; i++) {
   // append to container
   repoEl.appendChild(titleEl);
 
-  // append container to the dom
-  repoContainerEl.appendChild(repoEl);
+
+    // create a status element
+    var statusEl = document.createElement('span');
+    statusEl.classList = 'flex-row align-center';
+
+    // check if current repo has issues or not
+    if (repos[i].open_issues_count > 0) {
+      statusEl.innerHTML =
+        "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
+    } else {
+      statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+    }
+// append to container
+repoEl.appendChild(statusEl);
+
+// append container to the dom
+repoContainerEl.appendChild(repoEl);
 }
 
-repoSearchTerm.textContent = searchTerm;
 };
 
 userFormEl.addEventListener("submit", formSubmitHandler);
