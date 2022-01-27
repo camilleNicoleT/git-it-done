@@ -1,4 +1,3 @@
-var limitWarningEl = document.querySelector("#limit-warning");
 var issueContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
 var repoNameEl = document.querySelector("#repo-name");
@@ -17,9 +16,7 @@ var getRepoName = function() {
    //if no repo was given, redirect to the homepage
    document.location.replace("./index.html");
  }
-}
-
-
+};
 
 var getRepoIssues = function(repo) {
   //format the api url
@@ -78,6 +75,7 @@ if (issues[i].pull_request) {
 // append to container
 issueEl.appendChild(typeEl);
 
+//append to the dom
 issueContainerEl.appendChild(issueEl);
     }
 };
@@ -95,5 +93,4 @@ linkEl.setAttribute("target", "_blank");
 limitWarningEl.appendChild(linkEl);
 };
 
-getRepoIssues();
 getRepoName();
